@@ -1,16 +1,15 @@
 [package]
-name = "lattice"
+name = "rslattice"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "lattice"
+name = "rslattice"
 crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = {version = "0.23", features = ["abi3-py38", "extension-module"]}
 numpy = "0.23"
-# num-bigint = "0.4"
 malachite-bigint = "0.2"
 num-traits = "0.2"
 num-integer = "0.1"

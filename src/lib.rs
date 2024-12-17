@@ -10,6 +10,9 @@ use std::ops::SubAssign;
 // TODO: nearest plane
 // TODO: saturate, solve_diophantine
 
+// HNF algorithm adapted from https://github.com/lan496/hsnf
+// LLL algorithm adapted from https://github.com/orisano/olll
+
 fn swap_rows<T: Clone>(a: &mut Array2<T>, i: usize, j: usize) {
     let a_i = a.row(i).to_owned();
     let a_j = a.row(j).to_owned();
@@ -159,7 +162,7 @@ fn hnf_inner(mut a: Array2<BigInt>) -> Array2<BigInt> {
 }
 
 #[pymodule]
-fn lattice<'py>(_py: Python<'py>, m: &Bound<'py, PyModule>) -> PyResult<()> {
+fn rslattice<'py>(_py: Python<'py>, m: &Bound<'py, PyModule>) -> PyResult<()> {
     // TODO: make 2nd and 3rd args Option
     #[pyfn(m)]
     fn lll<'py>(

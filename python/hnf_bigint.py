@@ -4,8 +4,6 @@
 
 import numpy as np
 
-from util_types import IntMat
-
 
 def get_pivot(A, i1, j):
     idx = None
@@ -68,5 +66,5 @@ def _hnf_row(A):
             sj += 1
 
 
-def hnf_bigint(A: IntMat) -> IntMat:
+def hnf_bigint(A):
     return np.array(_hnf_row(A.tolist()), dtype=np.int64)

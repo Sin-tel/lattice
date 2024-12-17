@@ -1,5 +1,5 @@
 import numpy as np
-import lattice
+import rslattice
 from hnf_bigint import hnf_bigint
 from time import perf_counter
 import random
@@ -18,7 +18,7 @@ print(f"python {1000*(t_stop - t_start):.2f}ms")
 
 t_start = perf_counter()
 for i in range(10000):
-    res2 = lattice.hnf(a)
+    res2 = rslattice.hnf(a)
 t_stop = perf_counter()
 print(f"rust   {1000*(t_stop - t_start):.2f}ms")
 

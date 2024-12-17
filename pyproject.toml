@@ -3,7 +3,7 @@ requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "lattice"
+name = "rslattice"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Rust",
@@ -11,9 +11,16 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version"]
+dependencies = [
+  "numpy<2.0",
+]
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+]
 
 [tool.maturin]
+python-source = "python"
 features = ["pyo3/extension-module"]
-# python-source = "python"
-# module-name = "my_project._lib_name"
 

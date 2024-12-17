@@ -3,16 +3,15 @@
 
 import numpy as np
 
-from util_types import IntMat, FloatMat, IntVec
 
-MAX_LLL_ITERS = 800
+# MAX_LLL_ITERS = 800
 
 
-def innerprod(a: IntVec, b: IntVec, W: FloatMat) -> float:
+def innerprod(a, b, W) -> float:
     return np.dot(a, W @ b)
 
 
-def gramschmidt(v: IntMat, W: FloatMat) -> FloatMat:
+def gramschmidt(v, W):
     v = v.astype(np.double)
     u = v.copy()
 
@@ -26,7 +25,7 @@ def gramschmidt(v: IntMat, W: FloatMat) -> FloatMat:
 
 
 # LLL reduction on the rows of `basis`
-def reduction(basis: IntMat, delta: float, W: FloatMat) -> IntMat:
+def reduction(basis, delta: float, W):
     n = basis.shape[0]
     ortho = gramschmidt(basis, W)
 
@@ -44,11 +43,12 @@ def reduction(basis: IntMat, delta: float, W: FloatMat) -> IntMat:
                 basis[k] = basis[k] - basis[j] * round(mu_kj)
                 ortho = gramschmidt(basis, W)
 
-        l_condition = (delta - mu(k, k - 1) ** 2) * innerprod(ortho[k - 1], ortho[k - 1], W)
+        l_condition = (delta - mu(k, k - 1) ** 2) * innerprod(
+            ortho[k - 1], ortho[k - 1], W
+        )
         if innerprod(ortho[k], ortho[k], W) >= l_condition:
             k += 1
         else:
-            # basis[k], basis[k - 1] = basis[k - 1], basis[k].copy()  ##fix
             basis[[k - 1, k]] = basis[[k, k - 1]]
             ortho = gramschmidt(basis, W)
             k = max(k - 1, 1)
@@ -63,7 +63,7 @@ def reduction(basis: IntMat, delta: float, W: FloatMat) -> IntMat:
 # Babai's nearest plane algorithm for solving approximate CVP
 # `basis` should be LLL reduced first
 # operates on rows
-def nearest_plane(v: IntVec, basis: IntMat, W: FloatMat) -> IntVec:
+def nearest_plane(v, basis, W):
     b = v.copy()
     n = basis.shape[0]
 
