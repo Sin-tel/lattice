@@ -5,10 +5,10 @@ import olll
 import rslattice
 
 
-r = 29
-n = 30
+r = 19
+n = 20
 
-n_iters = 1
+n_iters = 10
 
 delta = 0.99
 
