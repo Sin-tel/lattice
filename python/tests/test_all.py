@@ -9,7 +9,8 @@ high = 100
 n_iters = 1000
 
 # All numpy runtime warnings should raise error
-np.seterr(all='raise')
+np.seterr(all="raise")
+
 
 def test_hnf():
     np.random.seed(42)
@@ -37,7 +38,6 @@ def test_hnf():
             assert overflow1 and overflow2
         else:
             assert np.all(res - res2 == 0)
-
 
 
 def test_lll():
@@ -96,6 +96,7 @@ def test_nearest_plane():
         res = olll.nearest_plane(v, a, W)
         res2 = rslattice.nearest_plane(v, a, W)
         assert np.all(res - res2 == 0), f"{repr(a)}, {repr(v)}"
+
 
 if __name__ == "__main__":
     test_integer_det()

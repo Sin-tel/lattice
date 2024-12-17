@@ -19,7 +19,9 @@ np.random.seed(42)
 
 t_start = perf_counter()
 for i in range(n_iters):
-    a = np.random.uniform(0, 1000, size = (r, n)).astype(np.int64) # this needs to be here for some reason!
+    a = np.random.uniform(0, 1000, size=(r, n)).astype(
+        np.int64
+    )  # this needs to be here for some reason!
     res = olll.reduction(a, delta=delta, W=W)
 t_stop = perf_counter()
 print(f"python {1000*(t_stop - t_start):.2f}ms")
@@ -28,11 +30,9 @@ print(f"python {1000*(t_stop - t_start):.2f}ms")
 np.random.seed(42)
 
 
-
 t_start = perf_counter()
 for i in range(n_iters):
-    a = np.random.uniform(0, 1000, size = (r, n)).astype(np.int64)
+    a = np.random.uniform(0, 1000, size=(r, n)).astype(np.int64)
     res2 = rslattice.lll(a, delta, W)
 t_stop = perf_counter()
 print(f"rust   {1000*(t_stop - t_start):.2f}ms")
-
