@@ -198,7 +198,7 @@ fn integer_det_inner(a: ArrayView2<i64>) -> Result<i64, String> {
 
     for i in 0..(n - 1) {
         if a[[i, i]] == 0 {
-            let swap = ((i + 1)..n).filter(|&j| a[[j, i]] != 0).next();
+            let swap = ((i + 1)..n).find(|&j| a[[j, i]] != 0);
             match swap {
                 Some(k) => {
                     swap_rows(&mut a, i, k);
@@ -308,7 +308,7 @@ fn rslattice<'py>(_py: Python<'py>, m: &Bound<'py, PyModule>) -> PyResult<()> {
     fn integer_det<'py>(_py: Python<'py>, basis: PyReadonlyArray2<'py, i64>) -> PyResult<i64> {
         let basis = basis.as_array();
         let res = integer_det_inner(basis);
-        res.map_err(|e| PyErr::new::<PyOverflowError, _>(e))
+        res.map_err(PyErr::new::<PyOverflowError, _>)
     }
 
     Ok(())
