@@ -2,6 +2,13 @@
 name = "rslattice"
 version = "0.1.0"
 edition = "2021"
+authors = ["Sintel"]
+description = "Python module for doing calculations on integer lattices."
+readme = "README.md"
+homepage = "https://github.com/Sin-tel/rslattice"
+repository = "https://github.com/Sin-tel/rslattice"
+license = "MIT"
+license-file = "LICENSE.txt"
 
 [lib]
 name = "rslattice"
