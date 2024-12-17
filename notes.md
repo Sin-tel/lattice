@@ -1,0 +1,1 @@
+maturin generate-ci github
